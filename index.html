@@ -1,0 +1,88 @@
+[1mdiff --git a/app.js b/app.js[m
+[1mindex e69de29..d7fd45e 100644[m
+[1m--- a/app.js[m
+[1m+++ b/app.js[m
+[36m@@ -0,0 +1,82 @@[m
+[32m+[m[32mfunction sortear() {[m
+[32m+[m[32m    // 1. Ler os campos como texto (para detectar campos vazios)[m
+[32m+[m[32m    const campoQuantidade = document.getElementById('quantidade');[m
+[32m+[m[32m    const campoInicio = document.getElementById('de');[m
+[32m+[m[32m    const campoFim = document.getElementById('ate');[m
+[32m+[m
+[32m+[m[32m    const quantidadeTexto = campoQuantidade.value;[m
+[32m+[m[32m    const inicioTexto = campoInicio.value;[m
+[32m+[m[32m    const fimTexto = campoFim.value;[m
+[32m+[m
+[32m+[m[32m    if (quantidadeTexto === '' || inicioTexto === '' || fimTexto === '') {[m
+[32m+[m[32m        alert('Preencha todos os campos.');[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    // 2. Converter para número[m
+[32m+[m[32m    const quantidade = Number(quantidadeTexto);[m
+[32m+[m[32m    const inicio = Number(inicioTexto);[m
+[32m+[m[32m    const fim = Number(fimTexto);[m
+[32m+[m
+[32m+[m[32m    // 3. Validações[m
+[32m+[m[32m    if (!Number.isInteger(quantidade) || quantidade <= 0) {[m
+[32m+[m[32m        alert('A quantidade deve ser um número inteiro maior que zero.');[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    if (!Number.isInteger(inicio) || !Number.isInteger(fim) ||[m
+[32m+[m[32m        inicio < 1 || fim < 1) {[m
+[32m+[m[32m        alert('O início e o fim devem ser números inteiros maiores que zero.');[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    if (inicio > fim) {[m
+[32m+[m[32m        alert('O valor inicial não pode ser maior que o valor final.');[m
+[32m+[m[32m        return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    // 4. Sortear os números dentro do intervalo inclusivo [inicio, fim][m
+[32m+[m[32m    const sorteados = [];[m
+[32m+[m
+[32m+[m[32m    for (let i = 0; i < quantidade; i++) {[m
+[32m+[m[32m        const numero = Math.floor([m
+[32m+[m[32m            Math.random() * (fim - inicio + 1)[m
+[32m+[m[32m        ) + inicio;[m
+[32m+[m[32m        sorteados.push(numero);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    // 5. Exibir o resultado[m
+[32m+[m[32m    const resultado = document.getElementById('resultado');[m
+[32m+[m[32m    resultado.innerHTML =[m
+[32m+[m[32m        '<label class="texto__paragrafo">' +[m
+[32m+[m[32m        `Números sorteados: ${sorteados.join(', ')}` +[m
+[32m+[m[32m        '</label>';[m
+[32m+[m
+[32m+[m[32m    // 6. Habilitar o botão Reiniciar[m
+[32m+[m[32m    const botaoReiniciar = document.getElementById('btn-reiniciar');[m
+[32m+[m[32m    botaoReiniciar.disabled = false;[m
+[32m+[m[32m    botaoReiniciar.classList.remove('container__botao-desabilitado');[m
+[32m+[m[32m    botaoReiniciar.classList.add('container__botao');[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfunction reiniciar() {[m
+[32m+[m[32m    // Limpar os campos[m
+[32m+[m[32m    document.getElementById('quantidade').value = '';[m
+[32m+[m[32m    document.getElementById('de').value = '';[m
+[32m+[m[32m    document.getElementById('ate').value = '';[m
+[32m+[m
+[32m+[m[32m    // Restaurar a mensagem inicial[m
+[32m+[m[32m    const resultado = document.getElementById('resultado');[m
+[32m+[m[32m    resultado.innerHTML =[m
+[32m+[m[32m        '<label class="texto__paragrafo">' +[m
+[32m+[m[32m        'Números sorteados: nenhum até agora' +[m
+[32m+[m[32m        '</label>';[m
+[32m+[m
+[32m+[m[32m    // Desabilitar o botão Reiniciar novamente[m
+[32m+[m[32m    const botaoReiniciar = document.getElementById('btn-reiniciar');[m
+[32m+[m[32m    botaoReiniciar.disabled = true;[m
+[32m+[m[32m    botaoReiniciar.classList.remove('container__botao');[m
+[32m+[m[32m    botaoReiniciar.classList.add('container__botao-desabilitado');[m
+[32m+[m
+[32m+[m[32m    document.getElementById('quantidade').focus();[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
